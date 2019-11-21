@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "Component": ["src/components/*"],
-      "Context": ["src/contexts/*"],
-      "Hook": ["src/hooks/*"],
-      "View": ["src/views/*"],
-      "Utility": ["src/utils/*"]
+      "Component/*": ["src/components/*"],
+      "Context/*": ["src/contexts/*"],
+      "Hook/*": ["src/hooks/*"],
+      "View/*": ["src/views/*"],
+      "Utility/*": ["src/utils/*"]
     },
     "jsx": "react"
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*"]
 }

@@ -1,8 +1,14 @@
-import React, { useEffect, useRef, useState, FormEvent } from 'react';
+import React, { useContext, useEffect, useRef, useState, FormEvent, Ref } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+
+import { ServerContext } from 'Context/ServerContext';
 
 import { StyledForm, StyledLabel, StyledSpan, StyledTextInput } from './Login.style';
 
-const Login: React.FC = () => {
+const Login = (props: RouteComponentProps) => {
+  const { history } = props;
+  const { login } = useContext(ServerContext);
+
   // Fields
   const [email, setEmail]: [string, any] = useState('');
   const [password, setPassword]: [string, any] = useState('');
@@ -12,16 +18,18 @@ const Login: React.FC = () => {
   const [passwordError, setPasswordError]: [boolean, any] = useState(false);
 
   // Refs for accessibility
-  const emailRef: React.Ref<HTMLInputElement> = useRef(null);
-  const passwordRef: React.Ref<HTMLInputElement> = useRef(null);
+  const emailRef: Ref<HTMLInputElement> = useRef(null);
+  const passwordRef: Ref<HTMLInputElement> = useRef(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEmailError(email.length === 0);
     setPasswordError(password.length === 0);
 
-    if (emailError || passwordError) {
-      emailError ? emailRef.current.focus() : passwordRef.current.focus();
+    if (email.length === 0 || password.length === 0) {
+      return email.length === 0 ? emailRef.current.focus() : passwordRef.current.focus();
+    } else {
+      return login(history);
     }
   };
 
@@ -31,13 +39,14 @@ const Login: React.FC = () => {
 
   return (
     <main>
-      <StyledForm onSubmit={e => handleSubmit(e)}>
+      <StyledForm onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
         <StyledLabel htmlFor="email">
           <StyledSpan>Email: *</StyledSpan>
           <StyledTextInput
-            aria-invalid={email.length === 0}
+            aria-invalid={email.length === 0 || (!email.includes('@') && !email.includes('.'))}
             aria-required="true"
             inputError={emailError}
+            id="email"
             name="email"
             onChange={({ target: { value } }) => setEmail(value)}
             ref={emailRef}
@@ -49,10 +58,11 @@ const Login: React.FC = () => {
         <StyledLabel htmlFor="password">
           <StyledSpan>Password: *</StyledSpan>
           <StyledTextInput
-            aria-invalid={password.length === 0}
+            aria-invalid={password.length <= 8}
             aria-required="true"
-            name="password"
+            id="password"
             inputError={passwordError}
+            name="password"
             onChange={({ target: { value } }) => setPassword(value)}
             ref={passwordRef}
             title="password"
@@ -61,7 +71,7 @@ const Login: React.FC = () => {
           />
         </StyledLabel>
 
-        <input type="submit"></input>
+        <input aria-label="Log In" title="Login" type="submit" value="Log In" />
       </StyledForm>
     </main>
   );

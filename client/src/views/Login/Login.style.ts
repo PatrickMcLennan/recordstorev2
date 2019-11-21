@@ -1,4 +1,4 @@
-import styled, { css, StyledComponent } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledForm = styled.form`
   ${({ theme: { flexin } }) => flexin('center', 'center', 'column')}
@@ -17,7 +17,7 @@ export const StyledSpan = styled.span`
   margin-bottom: 10px;
 `;
 
-export const StyledTextInput = styled.input`
+export const StyledTextInput = styled.input<{ inputError: boolean }>`
   ${({ inputError }) =>
     inputError &&
     css`
