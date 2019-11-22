@@ -19,6 +19,8 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
     main {
         display: block;
         padding: 0 10%;
+        min-height: ${({ headerHeight, footerHeight }) => window.innerHeight - headerHeight - footerHeight};
+        background-color: red;
     }
 `;
 
