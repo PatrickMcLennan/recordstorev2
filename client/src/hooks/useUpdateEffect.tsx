@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-const useUpdateEffect = (effect, dependencies = []) => {
+const useUpdateEffect = (effect: Function, dependencies: Array<any> = []) => {
   const isInitialMount: MutableRefObject<boolean> = useRef(true);
 
   useEffect(() => {

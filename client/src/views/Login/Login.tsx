@@ -1,17 +1,41 @@
-import React, { useContext, useEffect, useRef, useState, FormEvent, Ref } from 'react';
+import React, { useContext, useRef, useState, FormEvent, Ref } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { ServerContext } from 'Context/ServerContext';
 
+import useAxios from 'Hook/useAxios';
 import useUpdateEffect from 'Hook/useUpdateEffect';
 
 import { StyledForm, StyledMain, StyledLabel, StyledSpan, StyledTextInput } from './Login.style';
 
+const invalidEmail = (email: string): boolean => email.length === 0 || (!email.includes('@') && !email.includes('.'));
+
+const handleSubmitFailure = (
+  e: FormEvent<HTMLFormElement>,
+  callbackEmail,
+  refEmail,
+  wrongEmail: string,
+  callbackPassword,
+  refPassword,
+  wrongPassword: string
+): void => {
+  e.preventDefault();
+  callbackEmail(invalidEmail(wrongEmail));
+  callbackPassword(wrongPassword.length === 0);
+
+  if (invalidEmail(wrongEmail) || wrongPassword.length === 0) {
+    return wrongEmail.length === 0 ? refEmail.current.focus() : refPassword.current.focus();
+  }
+};
+
 const Login = (props: RouteComponentProps) => {
   const { history } = props;
-  const { login } = useContext(ServerContext);
+  const { axiosLogin } = useContext(ServerContext);
 
   const [showCreateAccountModals, setShowCreateAccountModals]: [boolean, any] = useState(false);
+  const { response, error, isLoading } = useAxios('GET', 'https://jsonplaceholder.typicode.com/todos');
+
+  console.log(response);
 
   // Log In Fields
   const [email, setEmail]: [string, any] = useState('');
@@ -29,18 +53,8 @@ const Login = (props: RouteComponentProps) => {
   const emailRef: Ref<HTMLInputElement> = useRef(null);
   const passwordRef: Ref<HTMLInputElement> = useRef(null);
 
-  const handleSubmitFailure = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    setEmailError(email.length === 0);
-    setPasswordError(password.length === 0);
-
-    if (email.length === 0 || password.length === 0) {
-      return email.length === 0 ? emailRef.current.focus() : passwordRef.current.focus();
-    }
-  };
-
   useUpdateEffect(() => {
-    setEmailError(email.length === 0);
+    setEmailError(invalidEmail(email));
   }, [email]);
 
   useUpdateEffect(() => {
@@ -52,12 +66,14 @@ const Login = (props: RouteComponentProps) => {
       <StyledForm
         data-testid="form"
         onSubmit={(e: FormEvent<HTMLFormElement>) =>
-          email.length === 0 || password.length === 0 ? handleSubmitFailure(e) : login(history)
+          invalidEmail(email) || password.length === 0
+            ? handleSubmitFailure(e, setEmailError, emailRef, email, setPasswordError, passwordRef, password)
+            : axiosLogin(history)
         }>
         <StyledLabel htmlFor="email">
           <StyledSpan>Email: *</StyledSpan>
           <StyledTextInput
-            aria-invalid={email.length === 0 || (!email.includes('@') && !email.includes('.'))}
+            aria-invalid={invalidEmail(email)}
             aria-required="true"
             autoFocus={true}
             data-testid="email-input"
@@ -132,6 +148,11 @@ const Login = (props: RouteComponentProps) => {
       </button>
     </StyledMain>
   );
+};
+
+export const helpers = {
+  handleSubmitFailure,
+  invalidEmail
 };
 
 export default Login;

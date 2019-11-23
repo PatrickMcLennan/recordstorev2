@@ -20,7 +20,7 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
         display: block;
         padding: 0 10%;
         min-height: ${({ headerHeight, footerHeight }) => window.innerHeight - headerHeight - footerHeight};
-        background-color: red;
+        /* background-color: red; */
     }
 `;
 
