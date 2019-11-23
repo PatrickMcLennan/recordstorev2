@@ -5,7 +5,9 @@
     "paths": {
       "Component/*": ["src/components/*"],
       "Context/*": ["src/contexts/*"],
+      "Font/*": ["src/assets/fonts/*"],
       "Hook/*": ["src/hooks/*"],
+      "Image/*": ["src/assets/images/*"],
       "View/*": ["src/views/*"],
       "Utility/*": ["src/utils/*"]
     },

@@ -2,8 +2,8 @@ import React, { useContext, useRef, useState, FormEvent, Ref } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { ServerContext } from 'Context/ServerContext';
+import { UserContext } from 'Context/UserContext';
 
-import useAxios from 'Hook/useAxios';
 import useUpdateEffect from 'Hook/useUpdateEffect';
 
 import { StyledForm, StyledMain, StyledLabel, StyledSpan, StyledTextInput } from './Login.style';
@@ -31,11 +31,9 @@ const handleSubmitFailure = (
 const Login = (props: RouteComponentProps) => {
   const { history } = props;
   const { axiosLogin } = useContext(ServerContext);
+  const { userId, setUser, setUserId } = useContext(UserContext);
 
   const [showCreateAccountModals, setShowCreateAccountModals]: [boolean, any] = useState(false);
-  const { response, error, isLoading } = useAxios('GET', 'https://jsonplaceholder.typicode.com/todos');
-
-  console.log(response);
 
   // Log In Fields
   const [email, setEmail]: [string, any] = useState('');
@@ -68,7 +66,7 @@ const Login = (props: RouteComponentProps) => {
         onSubmit={(e: FormEvent<HTMLFormElement>) =>
           invalidEmail(email) || password.length === 0
             ? handleSubmitFailure(e, setEmailError, emailRef, email, setPasswordError, passwordRef, password)
-            : axiosLogin(history)
+            : axiosLogin(history, setUser, setUserId)
         }>
         <StyledLabel htmlFor="email">
           <StyledSpan>Email: *</StyledSpan>

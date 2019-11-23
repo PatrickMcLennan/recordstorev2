@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IProps } from './dictionary';
 
-const Home: React.FC<IProps> = ({
-  match: {
-    params: { userId }
-  }
-}: IProps) => {
+import { UserContext } from 'Context/UserContext';
+
+const Home: React.FC<IProps> = (props: IProps) => {
+  const { userId } = useContext(UserContext);
   return (
     <main>
       <h2>u home dog</h2>

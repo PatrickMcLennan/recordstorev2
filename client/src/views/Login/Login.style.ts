@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const StyledMain = styled.main`
-  ${({ theme: { flexin } }) => flexin('center', 'center', 'column')}
+  ${({ theme: { flexin } }) => flexin('center', 'center', 'column')};
+  ${props => props.theme.mainHeight}
 `;
 
 export const StyledForm = styled.form`

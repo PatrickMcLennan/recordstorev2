@@ -55,12 +55,9 @@ const useAxios = (
         return setIsLoading(false);
       }
     };
-    console.log(loadProgress);
 
     makeCall();
   }, []);
-
-  console.log(loadProgress);
 
   return { response, error, isLoading, loadProgress };
 };
@@ -70,3 +67,15 @@ export const helpers = {
 };
 
 export default useAxios;
+
+// export const useXhr = (
+//   method: string,
+//   url: string,
+//   options?: {}
+// ): { response: {}; isLoading: boolean; error: Error; loadProgress: number } => {
+//   const [response, setResponse]: [{} | null, any] = useState(null);
+//   const [error, setError]: [Error, any] = useState(null);
+//   const [isLoading, setIsLoading]: [boolean, any] = useState(null);
+//   const [loadProgress, setLoadProgress]: [number, any] = useState(0);
+//   const xhr: XMLHttpRequest = new XMLHttpRequest();
+// };
