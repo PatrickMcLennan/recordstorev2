@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { ServerContext } from 'Context/ServerContext';
 import { UserContext } from 'Context/UserContext';
 
+import usePageMount from 'Hook/usePageMount';
 import useUpdateEffect from 'Hook/useUpdateEffect';
 
 import { StyledForm, StyledMain, StyledLabel, StyledSpan, StyledTextInput } from './Login.style';
@@ -50,6 +51,8 @@ const Login = (props: RouteComponentProps) => {
   // Refs for accessibility
   const emailRef: Ref<HTMLInputElement> = useRef(null);
   const passwordRef: Ref<HTMLInputElement> = useRef(null);
+
+  usePageMount('Log In');
 
   useUpdateEffect(() => {
     setEmailError(invalidEmail(email));

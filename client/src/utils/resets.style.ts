@@ -41,6 +41,7 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        color: white;
         font-family: 'Lato';
     }
     html {
@@ -50,10 +51,11 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
+        background-image: linear-gradient(to bottom, rgb(10,42,103), rgb(73, 173, 247))
     }
     main {
         display: block;
-        padding: 0 10%;
+        padding: 15px 7.5% 100px 7.5%;
         font-family: 'Lato';
     }
     ul {
@@ -79,9 +81,7 @@ export const theme: Function = (mainHeight: number): object => {
         flex-wrap: ${fw};
       `,
     headerFooter: css`
-      padding-top: 10px;
-      padding-bottom: 10px;
-      box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
+      box-shadow: 1px 0 5px rgba(255, 255, 255, 0.5);
     `,
     mainHeight: css`
       min-height: ${mainHeight}px;
@@ -89,6 +89,32 @@ export const theme: Function = (mainHeight: number): object => {
     mainPadding: css`
       padding-left: 5%;
       padding-right: 5%;
+    `,
+    // Colors
+    darkBlue: 'rgb(10,42,103)',
+    // Border Animation
+    borderSettings: css`
+      position: relative;
+      border: none;
+
+      &:hover {
+        span[data-testid='top-border'] {
+          right: -7.5px;
+          left: 7.5px;
+        }
+        span[data-testid='right-border'] {
+          top: 7.5px;
+          bottom: -7.5px;
+        }
+        span[data-testid='bottom-border'] {
+          right: 7.5px;
+          left: -7.5px;
+        }
+        span[data-testid='left-border'] {
+          top: -7.5px;
+          bottom: 7.5px;
+        }
+      }
     `
   };
 };

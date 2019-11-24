@@ -1,24 +1,34 @@
 import React, { forwardRef, RefObject, useContext } from 'react';
-import { Link } from 'react-router-dom';
+
+import HomeSVG from 'Component/svgs/HomeSVG/HomeSVG';
+import UserSVG from 'Component/svgs/UserSVG/UserSVG';
+import NotificationSVG from 'Component/svgs/NotificationSVG/NotificationSVG';
 
 import { UserContext } from 'Context/UserContext';
 
-import { StyledH1, StyledHeader, StyledLi, StyledNav } from './Nav.style';
+import { StyledH1, StyledHeader, StyledLink, StyledNav } from './Nav.style';
 
 const Nav = forwardRef((props: {}, ref: RefObject<HTMLElement>) => {
-  const { user, userId } = useContext(UserContext);
+  const { currentPage, notifications, user, userId } = useContext(UserContext);
+
   return (
-    <StyledHeader ref={ref}>
-      <StyledH1>recordStore</StyledH1>
+    <StyledHeader data-testid="header" ref={ref}>
+      <StyledH1 data-testid="h1">recordStore</StyledH1>
       {user && (
-        <StyledNav>
-          <ul role="menu">
-            <StyledLi role="menuitem" user={user}>
-              <Link aria-label="Link to Home Page" to={`/home/${userId}`}>
-                Home
-              </Link>
-            </StyledLi>
-          </ul>
+        <StyledNav data-testid="nav">
+          <StyledLink aria-label="Link to Home Page" current={currentPage.includes('home')} to={`/home/${userId}`}>
+            <HomeSVG />
+            Home
+          </StyledLink>
+          <StyledLink aria-label="Link to Edit Account Page" current={currentPage.includes('account')} to={`/account/${userId}`}>
+            <UserSVG />
+            Account
+          </StyledLink>
+          <StyledLink aria-label="Link to Notifications Page" current={currentPage.includes('notifications')} to={`/notifications/${userId}`}>
+            <NotificationSVG />
+            Notifications
+          </StyledLink>
+
         </StyledNav>
       )}
     </StyledHeader>

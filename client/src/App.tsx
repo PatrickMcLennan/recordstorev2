@@ -8,6 +8,7 @@ import Footer from 'Component/Footer/Footer';
 import { ServerContextProvider } from 'Context/ServerContext';
 import { UserContextProvider } from 'Context/UserContext';
 
+import Account from 'View/Account/Account';
 import Login from 'View/Login/Login';
 import Home from 'View/Home/Home';
 
@@ -49,6 +50,11 @@ const App: React.FC = () => {
                 exact
                 path="/home/:userId"
                 render={(props: RouteComponentProps<{ userId: string }>) => <Home {...props} />}
+              />
+              <Route
+                exact
+                path="/account/:userId"
+                render={(props: RouteComponentProps<{ userId: string }>) => <Account {...props} />}
               />
             </Switch>
             <Footer ref={footerRef} />

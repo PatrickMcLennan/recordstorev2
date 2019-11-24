@@ -10,12 +10,14 @@ module.exports = merge(common, {
   entry: ['babel-polyfill', './src/index.ts'],
   output: {
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
     filename: 'app.js'
   },
   devServer: {
     open: true,
     port: 8080,
     overlay: true,
+    historyApiFallback: true,
     stats: 'minimal'
   },
   module: {
