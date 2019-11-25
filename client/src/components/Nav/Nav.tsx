@@ -8,11 +8,11 @@ import { UserContext } from 'Context/UserContext';
 
 import { StyledH1, StyledHeader, StyledLink, StyledNav } from './Nav.style';
 
-const Nav = forwardRef((props: {}, ref: RefObject<HTMLElement>) => {
+const Nav = () => {
   const { currentPage, notifications, user, userId } = useContext(UserContext);
 
   return (
-    <StyledHeader data-testid="header" ref={ref}>
+    <StyledHeader data-testid="header">
       <StyledH1 data-testid="h1">recordStore</StyledH1>
       {user && (
         <StyledNav data-testid="nav">
@@ -20,19 +20,24 @@ const Nav = forwardRef((props: {}, ref: RefObject<HTMLElement>) => {
             <HomeSVG />
             Home
           </StyledLink>
-          <StyledLink aria-label="Link to Edit Account Page" current={currentPage.includes('account')} to={`/account/${userId}`}>
+          <StyledLink
+            aria-label="Link to Edit Account Page"
+            current={currentPage.includes('account')}
+            to={`/account/${userId}`}>
             <UserSVG />
             Account
           </StyledLink>
-          <StyledLink aria-label="Link to Notifications Page" current={currentPage.includes('notifications')} to={`/notifications/${userId}`}>
+          <StyledLink
+            aria-label="Link to Notifications Page"
+            current={currentPage.includes('notifications')}
+            to={`/notifications/${userId}`}>
             <NotificationSVG />
             Notifications
           </StyledLink>
-
         </StyledNav>
       )}
     </StyledHeader>
   );
-});
+};
 
 export default Nav;

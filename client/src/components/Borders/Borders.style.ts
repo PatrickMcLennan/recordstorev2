@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const borderStyles = styled.span`
   position: absolute;
   background-color: white;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in-out;
 `;
 
 export const TopBorder = styled(borderStyles)`
@@ -20,7 +20,7 @@ export const RightBorder = styled(borderStyles)`
   right: 0;
   bottom: 0;
   left: calc(100% - 1px);
-  transition-delay: 0.05s;
+  transition-delay: 0.025s;
 `;
 export const BottomBorder = styled(borderStyles)`
   height: 1px;
@@ -28,7 +28,7 @@ export const BottomBorder = styled(borderStyles)`
   right: 0;
   bottom: 0;
   left: 0;
-  transition-delay: 0.1s;
+  transition-delay: 0.05s;
 `;
 export const LeftBorder = styled(borderStyles)`
   width: 1px;
@@ -36,5 +36,5 @@ export const LeftBorder = styled(borderStyles)`
   bottom: 0;
   right: calc(100% - 1px);
   left: 0;
-  transition-delay: 0.15s;
+  transition-delay: 0.075s;
 `;

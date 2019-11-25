@@ -1,4 +1,5 @@
 import React, { createContext, ProviderProps, Consumer, useState } from 'react';
+import { ISong } from 'Utility/dictionary';
 
 const UserContext = createContext({} as IUserContext);
 
@@ -6,7 +7,7 @@ interface IUserContext {
   currentPage: string[];
   user: boolean;
   userId: string;
-  notifications: []
+  notifications: string[];
   setCurrentPage: (windowUrl: string) => string[];
   setUser: () => boolean;
   setUserId: () => string;
@@ -17,10 +18,10 @@ const UserContextProvider: React.FC = ({ children }: ProviderProps<IUserContext>
   const [user, setUser]: [boolean, any] = useState(true);
   const [userId, setUserId]: [string, any] = useState('ffdfs');
 
-  const notifications = [...Array(10).keys()].map(number => `Test Notification ${number}`)
+  const notifications = [...Array(10).keys()].map(number => `Test Notification ${number}`);
 
   return (
-    <UserContext.Provider value={{ notifications, currentPage, user, userId, setCurrentPage, setUser, setUserId }}>
+    <UserContext.Provider value={{ currentPage, notifications, user, userId, setCurrentPage, setUser, setUserId }}>
       {children}
     </UserContext.Provider>
   );

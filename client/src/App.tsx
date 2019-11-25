@@ -8,56 +8,30 @@ import Footer from 'Component/Footer/Footer';
 import { ServerContextProvider } from 'Context/ServerContext';
 import { UserContextProvider } from 'Context/UserContext';
 
-import Account from 'View/Account/Account';
-import Login from 'View/Login/Login';
-import Home from 'View/Home/Home';
+import Account, { IAccountProps } from 'View/Account/Account';
+import Home, { IHomeProps } from 'View/Home/Home';
+import Login, { ILoginProps } from 'View/Login/Login';
+import News, { INewsProps } from 'View/News/News';
+import User, { IUserProps } from 'View/User/User';
 
 import { GlobalStyle, theme } from 'Utility/resets.style';
 
 const App: React.FC = () => {
-  const headerRef: RefObject<null | HTMLElement> = useRef(null);
-  const footerRef: RefObject<null | HTMLElement> = useRef(null);
-  const firstMount: MutableRefObject<boolean> = useRef(true);
-
-  const [mainHeight, setMainHeight]: [number, any] = useState(0);
-
-  const resizer = useCallback(() => {
-    setMainHeight(window.innerHeight - headerRef.current.offsetHeight - footerRef.current.offsetHeight);
-  }, [firstMount.current]);
-
-  useEffect(() => {
-    setMainHeight(window.innerHeight - headerRef.current.offsetHeight - footerRef.current.offsetHeight);
-    window.addEventListener('resize', resizer);
-
-    return () => {
-      if (firstMount.current) {
-        firstMount.current = false;
-      }
-      window.removeEventListener('resize', resizer);
-    };
-  }, []);
-
   return (
     <Router>
       <GlobalStyle />
-      <ThemeProvider theme={theme(mainHeight)}>
+      <ThemeProvider theme={theme()}>
         <ServerContextProvider>
           <UserContextProvider>
-            <Nav ref={headerRef} />
+            <Nav />
             <Switch>
-              <Route exact path="/" render={(props: RouteComponentProps) => <Login {...props} />} />
-              <Route
-                exact
-                path="/home/:userId"
-                render={(props: RouteComponentProps<{ userId: string }>) => <Home {...props} />}
-              />
-              <Route
-                exact
-                path="/account/:userId"
-                render={(props: RouteComponentProps<{ userId: string }>) => <Account {...props} />}
-              />
+              <Route exact path="/" render={(props: ILoginProps) => <Login {...props} />} />
+              <Route exact path="/home/:userId" render={(props: IHomeProps) => <Home {...props} />} />
+              <Route exact path="/account/:userId" render={(props: IAccountProps) => <Account {...props} />} />
+              <Route exact path="/user/:userId/:searchedUserId" render={(props: IUserProps) => <User {...props} />} />
+              <Route exact path="/news/:userId/:searchedUserId" render={(props: INewsProps) => <News {...props} />} />
             </Switch>
-            <Footer ref={footerRef} />
+            <Footer />
           </UserContextProvider>
         </ServerContextProvider>
       </ThemeProvider>

@@ -84,14 +84,16 @@ export const theme: Function = (mainHeight: number): object => {
       box-shadow: 1px 0 5px rgba(255, 255, 255, 0.5);
     `,
     mainHeight: css`
-      min-height: ${mainHeight}px;
+      min-height: calc(100vh - 67px - 22.3821px);
     `,
     mainPadding: css`
       padding-left: 5%;
       padding-right: 5%;
     `,
+
     // Colors
-    darkBlue: 'rgb(10,42,103)',
+    mainDarkBlue: 'rgb(10,42,103)',
+
     // Border Animation
     borderSettings: css`
       position: relative;
@@ -99,20 +101,52 @@ export const theme: Function = (mainHeight: number): object => {
 
       &:hover {
         span[data-testid='top-border'] {
+          top: 0;
           right: -7.5px;
           left: 7.5px;
         }
         span[data-testid='right-border'] {
           top: 7.5px;
+          right: 0;
           bottom: -7.5px;
         }
         span[data-testid='bottom-border'] {
           right: 7.5px;
+          bottom: 0;
           left: -7.5px;
         }
         span[data-testid='left-border'] {
           top: -7.5px;
           bottom: 7.5px;
+          left: 0;
+        }
+      }
+    `,
+    // Generic styling for Button hover/Focus
+    buttonAnimation: css`
+      transition: all 0.3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        background-color: white;
+        border: 1px solid ${({ theme: { darkBlue } }) => darkBlue};
+
+        > * {
+          color: ${({ theme: { darkBlue } }) => darkBlue};
+          color: ${({ theme: { darkBlue } }) => darkBlue};
+        }
+
+        svg {
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          & > * {
+            fill: ${({ theme: { darkBlue } }) => darkBlue};
+          }
         }
       }
     `

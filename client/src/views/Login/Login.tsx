@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, FormEvent, Ref } from 'react';
+import React, { useContext, useRef, useState, FormEvent, Ref, RefObject } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { ServerContext } from 'Context/ServerContext';
@@ -7,17 +7,34 @@ import { UserContext } from 'Context/UserContext';
 import usePageMount from 'Hook/usePageMount';
 import useUpdateEffect from 'Hook/useUpdateEffect';
 
-import { StyledForm, StyledMain, StyledLabel, StyledSpan, StyledTextInput } from './Login.style';
+import {
+  StyledCard,
+  StyledCardDiv,
+  StyledForm,
+  StyledH2,
+  StyledH2Span,
+  StyledLoginSubmit,
+  StyledMain,
+  StyledLabel,
+  StyledP,
+  StyledSpan,
+  StyledSVGBox,
+  StyledTextInput
+} from './Login.style';
+import SpotifySVG from 'Component/svgs/SpotifySVG/SpotifySVG';
+import YoutubeSVG from 'Component/svgs/YoutubeSVG/YoutubeSVG';
+
+export interface ILoginProps extends RouteComponentProps {}
 
 const invalidEmail = (email: string): boolean => email.length === 0 || (!email.includes('@') && !email.includes('.'));
 
 const handleSubmitFailure = (
   e: FormEvent<HTMLFormElement>,
-  callbackEmail,
-  refEmail,
+  callbackEmail: React.Dispatch<boolean>,
+  refEmail: RefObject<HTMLElement>,
   wrongEmail: string,
-  callbackPassword,
-  refPassword,
+  callbackPassword: React.Dispatch<boolean>,
+  refPassword: RefObject<HTMLElement>,
   wrongPassword: string
 ): void => {
   e.preventDefault();
@@ -29,7 +46,7 @@ const handleSubmitFailure = (
   }
 };
 
-const Login = (props: RouteComponentProps) => {
+const Login = (props: ILoginProps) => {
   const { history } = props;
   const { axiosLogin } = useContext(ServerContext);
   const { userId, setUser, setUserId } = useContext(UserContext);
@@ -64,55 +81,73 @@ const Login = (props: RouteComponentProps) => {
 
   return (
     <StyledMain>
-      <StyledForm
-        data-testid="form"
-        onSubmit={(e: FormEvent<HTMLFormElement>) =>
-          invalidEmail(email) || password.length === 0
-            ? handleSubmitFailure(e, setEmailError, emailRef, email, setPasswordError, passwordRef, password)
-            : axiosLogin(history, setUser, setUserId)
-        }>
-        <StyledLabel htmlFor="email">
-          <StyledSpan>Email: *</StyledSpan>
-          <StyledTextInput
-            aria-invalid={invalidEmail(email)}
-            aria-required="true"
-            autoFocus={true}
-            data-testid="email-input"
-            inputError={emailError}
-            id="email"
-            name="email"
-            onChange={({ target: { value } }) => setEmail(value)}
-            ref={emailRef}
-            title="Email"
-            type="email"
-            value={email}
+      <StyledCard>
+        <StyledCardDiv>
+          <StyledH2>News</StyledH2>
+          <StyledH2Span>-</StyledH2Span>
+          <StyledH2>Music</StyledH2>
+          <StyledH2Span>-</StyledH2Span>
+          <StyledH2>Lorum</StyledH2>
+
+          <StyledP>
+            An account with recordStore lets you read the latest music news, stream new music, create + share playlists with
+            friends and more.
+          </StyledP>
+
+          <StyledSVGBox>
+            <SpotifySVG />
+            <YoutubeSVG />
+          </StyledSVGBox>
+        </StyledCardDiv>
+        <StyledForm
+          data-testid="form"
+          onSubmit={(e: FormEvent<HTMLFormElement>) =>
+            invalidEmail(email) || password.length === 0
+              ? handleSubmitFailure(e, setEmailError, emailRef, email, setPasswordError, passwordRef, password)
+              : axiosLogin(history, setUser, setUserId)
+          }>
+          <StyledLabel htmlFor="email">
+            <StyledSpan>Email: *</StyledSpan>
+            <StyledTextInput
+              aria-invalid={invalidEmail(email)}
+              aria-required="true"
+              autoFocus={true}
+              data-testid="email-input"
+              inputError={emailError}
+              id="email"
+              name="email"
+              onChange={({ target: { value } }) => setEmail(value)}
+              ref={emailRef}
+              title="Email"
+              type="email"
+              value={email}
+            />
+          </StyledLabel>
+          <StyledLabel htmlFor="password" showCreateAccountModals={showCreateAccountModals}>
+            <StyledSpan>Password: *</StyledSpan>
+            <StyledTextInput
+              aria-invalid={password.length <= 8}
+              aria-required="true"
+              data-testid="password-input"
+              id="password"
+              inputError={passwordError}
+              name="password"
+              onChange={({ target: { value } }) => setPassword(value)}
+              ref={passwordRef}
+              title="password"
+              type="password"
+              value={password}
+            />
+          </StyledLabel>
+          <StyledLoginSubmit
+            aria-label="Log In"
+            data-testid="submit"
+            title="Login"
+            type="submit"
+            value={showCreateAccountModals ? 'Create My Account' : 'Log In'}
           />
-        </StyledLabel>
-        <StyledLabel htmlFor="password" showCreateAccountModals={showCreateAccountModals}>
-          <StyledSpan>Password: *</StyledSpan>
-          <StyledTextInput
-            aria-invalid={password.length <= 8}
-            aria-required="true"
-            data-testid="password-input"
-            id="password"
-            inputError={passwordError}
-            name="password"
-            onChange={({ target: { value } }) => setPassword(value)}
-            ref={passwordRef}
-            title="password"
-            type="password"
-            value={password}
-          />
-        </StyledLabel>
-        <input
-          aria-label="Log In"
-          data-testid="submit"
-          title="Login"
-          type="submit"
-          value={showCreateAccountModals ? 'Create My Account' : 'Log In'}
-        />
-      </StyledForm>
-      <div aria-modal="true">
+        </StyledForm>
+        {/* <div aria-modal="true">
         <StyledLabel htmlFor="firstName" showCreateAccountModals={showCreateAccountModals}>
           <StyledSpan>First Name: *</StyledSpan>
           <StyledTextInput
@@ -146,7 +181,8 @@ const Login = (props: RouteComponentProps) => {
         onClick={() => setShowCreateAccountModals(!showCreateAccountModals)}
         title="Create An Account">
         Create An Account
-      </button>
+      </button> */}
+      </StyledCard>
     </StyledMain>
   );
 };

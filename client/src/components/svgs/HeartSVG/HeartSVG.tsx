@@ -1,12 +1,18 @@
 import React from 'react';
 
-const HeartSVG = () => {
+import { StyledSVG } from './HeartSVG.style';
+interface IProps {
+  userLiked: boolean;
+}
+
+const HeartSVG = ({ userLiked }: IProps) => {
   return (
-    <svg
+    <StyledSVG
       version="1.1"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
+      userLiked={userLiked}
       viewBox="0 0 40.508 40.508"
       xmlSpace="preserve">
       <g>
@@ -36,7 +42,7 @@ const HeartSVG = () => {
       <g></g>
       <g></g>
       <g></g>
-    </svg>
+    </StyledSVG>
   );
 };
 

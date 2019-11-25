@@ -7,9 +7,9 @@ import { UserContext } from 'Context/UserContext';
 
 import usePageMount from 'Hook/usePageMount';
 
-interface IProps extends RouteComponentProps<{ userId: string }> {}
+export interface IHomeProps extends RouteComponentProps<{ userId: string }> {}
 
-const Home: React.FC<IProps> = (props: IProps) => {
+const Home: React.FC<IHomeProps> = (props: IHomeProps) => {
   const { userId } = useContext(UserContext);
 
   usePageMount('Home');
