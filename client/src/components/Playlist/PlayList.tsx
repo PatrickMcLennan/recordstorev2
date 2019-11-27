@@ -25,7 +25,7 @@ interface IProps {
 }
 
 // Generate Service Information/Links for the specific song
-const serviceInformation = (service: string, songTitle?: string): { href: string; svg: any } => {
+const serviceInformation: Function = (service: string, songTitle?: string): { href: string; svg: any } => {
   switch (service) {
     case 'spotify':
       return {
@@ -57,7 +57,11 @@ const Playlist: React.FC<IProps> = ({ playlistTitle, tracks, userName }: IProps)
               <StyledLi key={i}>
                 <StyledButton>
                   <PlaySVG />
-                  <StyledImg src={songArtwork ? songArtwork : 'https://50px.co/wp-content/uploads/2018/10/50px.gif'} alt={`The album cover for ${songAlbum}`} title={`${songAlbum}`} />
+                  <StyledImg
+                    src={songArtwork ? songArtwork : 'https://50px.co/wp-content/uploads/2018/10/50px.gif'}
+                    alt={`The album cover for ${songAlbum}`}
+                    title={`${songAlbum}`}
+                  />
                   <span>{songTitle}</span>
                   <span>{songArtist}</span>
                 </StyledButton>

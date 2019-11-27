@@ -19,7 +19,7 @@ const Home: React.FC<IHomeProps> = (props: IHomeProps) => {
       <Playlist
         userName="Patrick"
         playlistTitle="Tester"
-        tracks={[{ songTitle: 'tester title', songArtist: 'tester artist', service: 'spotify' }]}
+        tracks={[{ service: 'spotify', songArtist: 'tester artist', songAlbum: 'test album', songTitle: 'tester title' }]}
       />
     </main>
   );

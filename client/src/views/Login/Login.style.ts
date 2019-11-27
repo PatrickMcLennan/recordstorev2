@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const StyledCard = styled.div`
-  ${({ theme: { flexin } }) => flexin()}
+  ${({ theme: { flexin } }) => flexin('space-between')}
   padding: 20px;
+  height: 65vh;
+  width: 75vw;
   background-image: linear-gradient(
     to bottom right,
     rgba(255, 255, 255, 0.75) 50%,
@@ -13,8 +15,16 @@ export const StyledCard = styled.div`
 `;
 
 export const StyledCardDiv = styled.div`
+  ${({ theme: { flexin } }) => flexin('flex-start', 'flex-start', 'column')}
   align-self: stretch;
   margin-right: 10px;
+`;
+
+export const StyledCreateAccountButton = styled.button`
+  margin-top: auto;
+  background: none;
+  border: 1px solid ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
+  color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
 `;
 
 export const StyledDiv = styled.div`
@@ -22,30 +32,26 @@ export const StyledDiv = styled.div`
 `;
 
 export const StyledForm = styled.form`
-  padding-top: 150px;
+  ${({ theme: { flexin } }) => flexin('flex-end', 'flex-end', 'column')}
+  align-self: stretch;
 `;
 
 export const StyledH2 = styled.h2`
-  display: inline-block;
+  display: block;
   color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
   font-size: 26px;
   line-height: 30px;
+  font-size: 35px;
   font-weight: 100;
   letter-spacing: 1px;
+  line-height: 40px;
+  text-align: center;
   text-transform: uppercase;
-`;
-
-export const StyledH2Span = styled.span`
-  display: inline-block;
-  height: 29px;
-  margin: 0 5px;
-  color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
-  vertical-align: middle;
 `;
 
 export const StyledLabel = styled.label<{ showCreateAccountModals?: boolean }>`
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   font-size: 18px;
   line-height: 22px;
   text-transform: uppercase;
@@ -74,7 +80,6 @@ export const StyledMain = styled.main`
 
 export const StyledP = styled.p`
   position: relative;
-  max-width: 320px;
   margin-top: 20px;
   padding: 5px 20px;
   color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
@@ -96,9 +101,35 @@ export const StyledP = styled.p`
   }
 `;
 
+export const StyledFormTitleSpan = styled.span`
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+`;
+
+export const StyledScrollWindow = styled.div`
+  ${({ theme: { flexin } }) => flexin()};
+  margin-top: 20px;
+  margin-right: 50px;
+  margin-left: 50px;
+  padding: 10px 0;
+  box-shadow: inset 33px 0 10px 0px rgba(255, 255, 255, 0.75), inset -33px 0px 10px 0px rgba(255, 255, 255, 0.75);
+
+  svg {
+    margin-right: 20px;
+    height: 30px;
+    width: 30px;
+  }
+`;
+
 export const StyledSpan = styled.span`
   display: block;
   margin-bottom: 10px;
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 27px;
   text-align: right;
 `;
 
@@ -108,14 +139,5 @@ export const StyledSVGBox = styled.div`
 `;
 
 export const StyledTextInput = styled.input<{ inputError?: boolean }>`
-  padding: 5px;
-  background-color: transparent;
-  border: 1px solid white;
-  font-size: 20px;
-  line-height: 22px;
-  ${({ inputError }) =>
-    inputError &&
-    css`
-      border: 1px solid red;
-    `};
+  ${({ theme: { whiteTextInput } }) => whiteTextInput}
 `;

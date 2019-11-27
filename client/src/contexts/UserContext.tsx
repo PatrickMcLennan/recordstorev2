@@ -9,6 +9,7 @@ interface IUserContext {
   userId: string;
   notifications: string[];
   setCurrentPage: (windowUrl: string) => string[];
+  setNotifications: () => string[];
   setUser: () => boolean;
   setUserId: () => string;
 }
@@ -18,10 +19,13 @@ const UserContextProvider: React.FC = ({ children }: ProviderProps<IUserContext>
   const [user, setUser]: [boolean, any] = useState(true);
   const [userId, setUserId]: [string, any] = useState('ffdfs');
 
-  const notifications = [...Array(10).keys()].map(number => `Test Notification ${number}`);
+  const [notifications, setNotifications]: [string[], any] = useState(
+    [...Array(10).keys()].map(number => `Test Notification ${number}`)
+  );
 
   return (
-    <UserContext.Provider value={{ currentPage, notifications, user, userId, setCurrentPage, setUser, setUserId }}>
+    <UserContext.Provider
+      value={{ currentPage, notifications, user, userId, setCurrentPage, setNotifications, setUser, setUserId }}>
       {children}
     </UserContext.Provider>
   );

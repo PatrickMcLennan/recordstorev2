@@ -10,13 +10,15 @@ import useUpdateEffect from 'Hook/useUpdateEffect';
 import {
   StyledCard,
   StyledCardDiv,
+  StyledCreateAccountButton,
   StyledForm,
+  StyledFormTitleSpan,
   StyledH2,
-  StyledH2Span,
   StyledLoginSubmit,
   StyledMain,
   StyledLabel,
   StyledP,
+  StyledScrollWindow,
   StyledSpan,
   StyledSVGBox,
   StyledTextInput
@@ -83,21 +85,20 @@ const Login = (props: ILoginProps) => {
     <StyledMain>
       <StyledCard>
         <StyledCardDiv>
-          <StyledH2>News</StyledH2>
-          <StyledH2Span>-</StyledH2Span>
-          <StyledH2>Music</StyledH2>
-          <StyledH2Span>-</StyledH2Span>
-          <StyledH2>Lorum</StyledH2>
-
+          <StyledH2>News - Music - Lorum</StyledH2>
+          <StyledScrollWindow>
+            <YoutubeSVG />
+            <SpotifySVG />
+          </StyledScrollWindow>
           <StyledP>
             An account with recordStore lets you read the latest music news, stream new music, create + share playlists with
             friends and more.
           </StyledP>
-
           <StyledSVGBox>
             <SpotifySVG />
             <YoutubeSVG />
           </StyledSVGBox>
+          <StyledCreateAccountButton>Create Your Free Account</StyledCreateAccountButton>
         </StyledCardDiv>
         <StyledForm
           data-testid="form"
@@ -106,6 +107,7 @@ const Login = (props: ILoginProps) => {
               ? handleSubmitFailure(e, setEmailError, emailRef, email, setPasswordError, passwordRef, password)
               : axiosLogin(history, setUser, setUserId)
           }>
+          <StyledFormTitleSpan>Already a member?</StyledFormTitleSpan>
           <StyledLabel htmlFor="email">
             <StyledSpan>Email: *</StyledSpan>
             <StyledTextInput

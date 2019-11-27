@@ -65,7 +65,10 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
     a:visited {
         color: inherit;
         text-decoration: none;
-
+    }
+    button {
+        background: none;
+        border: none;
     }
 `;
 
@@ -149,6 +152,22 @@ export const theme: Function = (mainHeight: number): object => {
           }
         }
       }
+    `,
+    whiteTextInput: css<{ inputError?: boolean }>`
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.75);
+      border: 1px solid white;
+      box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.5);
+      color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
+      font-size: 20px;
+      line-height: 22px;
+      transition: all 0.3s ease-in-out;
+
+      ${({ inputError }) =>
+        inputError &&
+        css`
+          background-color: rgba(231, 76, 60, 0.7);
+        `}
     `
   };
 };
