@@ -1,6 +1,4 @@
 import { createGlobalStyle, css, GlobalStyleComponent } from 'styled-components';
-// import Lato from 'Font/Lato-Black';
-// import test from 'Image/tester';
 
 export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
 

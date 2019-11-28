@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css, StyledComponent } from 'styled-components';
 
-export const StyledCard = styled.div`
+export const StyledCard: StyledComponent<'div', {}> = styled.div`
   ${({ theme: { flexin } }) => flexin('space-between')}
   padding: 20px;
   height: 65vh;
@@ -14,29 +14,27 @@ export const StyledCard = styled.div`
   );
 `;
 
-export const StyledCardDiv = styled.div`
-  ${({ theme: { flexin } }) => flexin('flex-start', 'flex-start', 'column')}
-  align-self: stretch;
-  margin-right: 10px;
-`;
-
-export const StyledCreateAccountButton = styled.button`
+export const StyledCreateAccountButton: StyledComponent<'button', {}> = styled.button`
   margin-top: auto;
+  padding: 5px 15px;
   background: none;
   border: 1px solid ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
   color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 24px;
 `;
 
-export const StyledDiv = styled.div`
+export const StyledDiv: StyledComponent<'div', {}> = styled.div`
   ${({ theme: { flexin } }) => flexin()}
 `;
 
-export const StyledForm = styled.form`
+export const StyledForm: StyledComponent<'form', {}> = styled.form`
   ${({ theme: { flexin } }) => flexin('flex-end', 'flex-end', 'column')}
   align-self: stretch;
 `;
 
-export const StyledH2 = styled.h2`
+export const StyledH2: StyledComponent<'h2', {}> = styled.h2`
   display: block;
   color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
   font-size: 26px;
@@ -49,7 +47,7 @@ export const StyledH2 = styled.h2`
   text-transform: uppercase;
 `;
 
-export const StyledLabel = styled.label<{ showCreateAccountModals?: boolean }>`
+export const StyledLabel: StyledComponent<'label', {}, { showCreateAccountModals?: boolean }> = styled.label`
   display: block;
   margin-bottom: 60px;
   font-size: 18px;
@@ -60,25 +58,33 @@ export const StyledLabel = styled.label<{ showCreateAccountModals?: boolean }>`
   }
 `;
 
-export const StyledLoginSubmit = styled.input`
+export const StyledLoginDiv: StyledComponent<'div', {}> = styled.div`
+  ${({ theme: { flexin } }) => flexin('flex-start', 'flex-start', 'column')}
+  align-self: stretch;
+  margin-right: 10px;
+`;
+
+export const StyledLoginSubmit: StyledComponent<'input', {}> = styled.input`
   display: block;
   margin: 0 auto;
   padding: 5px 15px;
   background-color: transparent;
   border: 1px solid white;
   cursor: pointer;
+  font-size: 20px;
+  line-height: 24px;
   letter-spacing: 1px;
   text-align: center;
   text-transform: uppercase;
   ${({ theme: { buttonAnimation } }) => buttonAnimation}
 `;
 
-export const StyledMain = styled.main`
+export const StyledMain: StyledComponent<'main', {}> = styled.main`
   ${({ theme: { flexin } }) => flexin()};
   ${props => props.theme.mainHeight}
 `;
 
-export const StyledP = styled.p`
+export const StyledP: StyledComponent<'p', {}> = styled.p`
   position: relative;
   margin-top: 20px;
   padding: 5px 20px;
@@ -101,7 +107,7 @@ export const StyledP = styled.p`
   }
 `;
 
-export const StyledFormTitleSpan = styled.span`
+export const StyledFormTitleSpan: StyledComponent<'span', {}> = styled.span`
   display: block;
   margin-bottom: 15px;
   font-size: 16px;
@@ -109,7 +115,7 @@ export const StyledFormTitleSpan = styled.span`
   text-align: center;
 `;
 
-export const StyledScrollWindow = styled.div`
+export const StyledScrollWindow: StyledComponent<'div', {}> = styled.div`
   ${({ theme: { flexin } }) => flexin()};
   margin-top: 20px;
   margin-right: 50px;
@@ -124,7 +130,7 @@ export const StyledScrollWindow = styled.div`
   }
 `;
 
-export const StyledSpan = styled.span`
+export const StyledSpan: StyledComponent<'span', {}> = styled.span`
   display: block;
   margin-bottom: 10px;
   font-size: 23px;
@@ -133,11 +139,11 @@ export const StyledSpan = styled.span`
   text-align: right;
 `;
 
-export const StyledSVGBox = styled.div`
+export const StyledSVGBox: StyledComponent<'div', {}> = styled.div`
   ${({ theme: { flexin } }) => flexin('space-between')};
   height: 30px;
 `;
 
-export const StyledTextInput = styled.input<{ inputError?: boolean }>`
+export const StyledTextInput: StyledComponent<'input', {}, { inputError?: boolean }> = styled.input`
   ${({ theme: { whiteTextInput } }) => whiteTextInput}
 `;

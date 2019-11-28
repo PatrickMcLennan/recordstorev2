@@ -5,7 +5,7 @@ export interface IUserProps extends RouteComponentProps<{ userId: string; search
 
 import usePageMount from 'Hook/usePageMount';
 
-const User = (props: IUserProps) => {
+const User: React.FC<IUserProps> = (props: IUserProps) => {
   usePageMount('User X');
 
   return <main>user page babaaay</main>;

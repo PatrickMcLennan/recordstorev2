@@ -9,7 +9,6 @@ import useUpdateEffect from 'Hook/useUpdateEffect';
 
 import {
   StyledCard,
-  StyledCardDiv,
   StyledCreateAccountButton,
   StyledForm,
   StyledFormTitleSpan,
@@ -17,6 +16,7 @@ import {
   StyledLoginSubmit,
   StyledMain,
   StyledLabel,
+  StyledLoginDiv,
   StyledP,
   StyledScrollWindow,
   StyledSpan,
@@ -48,7 +48,7 @@ const handleSubmitFailure = (
   }
 };
 
-const Login = (props: ILoginProps) => {
+const Login: React.FC<ILoginProps> = (props: ILoginProps) => {
   const { history } = props;
   const { axiosLogin } = useContext(ServerContext);
   const { userId, setUser, setUserId } = useContext(UserContext);
@@ -84,7 +84,7 @@ const Login = (props: ILoginProps) => {
   return (
     <StyledMain>
       <StyledCard>
-        <StyledCardDiv>
+        <StyledLoginDiv>
           <StyledH2>News - Music - Lorum</StyledH2>
           <StyledScrollWindow>
             <YoutubeSVG />
@@ -99,7 +99,7 @@ const Login = (props: ILoginProps) => {
             <YoutubeSVG />
           </StyledSVGBox>
           <StyledCreateAccountButton>Create Your Free Account</StyledCreateAccountButton>
-        </StyledCardDiv>
+        </StyledLoginDiv>
         <StyledForm
           data-testid="form"
           onSubmit={(e: FormEvent<HTMLFormElement>) =>

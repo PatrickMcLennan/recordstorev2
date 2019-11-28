@@ -5,7 +5,7 @@ export interface IEditAccountProps extends RouteComponentProps<{ userId: string 
 
 import usePageMount from 'Hook/usePageMount';
 
-const EditAccount = (props: IEditAccountProps) => {
+const EditAccount: React.FC<IEditAccountProps> = (props: IEditAccountProps) => {
   usePageMount('Edit Account');
   return <main>edit account</main>;
 };

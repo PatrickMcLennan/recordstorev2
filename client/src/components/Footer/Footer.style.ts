@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
 
-export const StyledFooter = styled.footer`
+export const StyledFooter: StyledComponent<'footer', {}> = styled.footer`
+${({ theme: { flexin } }) => flexin('space-between')}
   ${({ theme: { headerFooter } }) => headerFooter}
   ${({ theme: { mainPadding } }) => mainPadding}
   padding-top: 10px;

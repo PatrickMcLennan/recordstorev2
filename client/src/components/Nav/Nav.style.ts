@@ -1,24 +1,24 @@
-import styled, { css, StyledComponent } from 'styled-components';
+import styled, { css, StyledComponent, StyledComponentBase } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const StyledHeader: StyledComponent<React.FC, {}> = styled.header`
+export const StyledHeader: StyledComponent<'header', {}> = styled.header`
   ${({ theme: { flexin } }) => flexin('space-between')}
   ${({ theme: { mainPadding } }) => mainPadding}
   ${({ theme: { headerFooter } }) => headerFooter}
 `;
 
-export const StyledH1: StyledComponent<React.FC, {}> = styled.h1`
+export const StyledH1: StyledComponent<'h1', {}> = styled.h1`
   padding: 10px 0;
   font-weight: 300;
   letter-spacing: 0.75px;
 `;
 
-export const StyledNav: StyledComponent<React.FC, {}> = styled.nav`
+export const StyledNav: StyledComponent<'nav', {}> = styled.nav`
   ${({ theme: { flexin } }) => flexin()}
   align-self: stretch;
 `;
 
-export const StyledLink: StyledComponent<React.FC, {}> = styled(Link)<{ current: boolean }>`
+export const StyledLink: StyledComponent<typeof Link, any, { current: Boolean }> = styled(Link)`
   ${({ theme: { flexin } }) => flexin('center', 'center', 'column')}
   position: relative;
   padding: 10px 20px;
@@ -49,7 +49,7 @@ export const StyledLink: StyledComponent<React.FC, {}> = styled(Link)<{ current:
   }
 `;
 
-export const StyledNavUl: StyledComponent<React.FC, {}> = styled.ul`
+export const StyledNavUl: StyledComponent<'ul', {}> = styled.ul`
   position: absolute;
   top: 100%;
   bottom: 0;
@@ -60,13 +60,14 @@ export const StyledNavUl: StyledComponent<React.FC, {}> = styled.ul`
   /* z-index: 100; */
 `;
 
-export const StyledNavLi: StyledComponent<React.FC, {}> = styled.li`
+export const StyledNavLi: StyledComponent<'li', {}> = styled.li`
   background-color: white;
   color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
   font-weight: 500;
   letter-spacing: 0.75px;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
+  white-space: nowrap;
   z-index: 100;
 
   & > a {
