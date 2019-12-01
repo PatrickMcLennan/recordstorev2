@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledH2, StyledP } from './AboutRecordStore.style';
+import { StyledP } from './AboutRecordStore.style';
 import usePageMount from 'Hook/usePageMount';
 
 export interface IAboutRecordStoreProps {}
@@ -9,7 +9,7 @@ const AboutRecordStore: React.FC<IAboutRecordStoreProps> = () => {
   usePageMount('About');
   return (
     <main>
-      <StyledH2>Thanks for checking out recordStore!</StyledH2>
+      <h2>Thanks for checking out recordStore!</h2>
 
       <StyledP>
         recordStore is a passion project made in hopes that people can discover new music across all platforms easier.

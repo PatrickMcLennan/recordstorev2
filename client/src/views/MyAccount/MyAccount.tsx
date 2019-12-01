@@ -6,7 +6,11 @@ export interface IMyAccountProps extends RouteComponentProps<{ userId: string }>
 
 const MyAccount: React.FC<IMyAccountProps> = (props: IMyAccountProps) => {
   usePageMount('My Account');
-  return <main>hello this is my account</main>;
+  return (
+    <main>
+      <h2>my account</h2>
+    </main>
+  );
 };
 
 export default MyAccount;

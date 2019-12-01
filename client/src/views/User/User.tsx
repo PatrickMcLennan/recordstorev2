@@ -8,7 +8,11 @@ import usePageMount from 'Hook/usePageMount';
 const User: React.FC<IUserProps> = (props: IUserProps) => {
   usePageMount('User X');
 
-  return <main>user page babaaay</main>;
+  return (
+    <main>
+      <h2>user</h2>
+    </main>
+  );
 };
 
 export default User;

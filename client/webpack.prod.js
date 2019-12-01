@@ -46,6 +46,11 @@ module.exports = merge(common, {
           test: '*.style.ts',
           name: 'css',
           chunks: 'all'
+        },
+        styledComponents: {
+          test: /node_modules\/styled-components/,
+          name: 'styled-components',
+          chunks: 'all'
         }
       }
     },

@@ -6,7 +6,11 @@ export interface INotificationsProps extends RouteComponentProps<{ userId: strin
 
 const Notifications: React.FC<INotificationsProps> = (props: INotificationsProps) => {
   usePageMount('Notifications');
-  return <main>notifications</main>;
+  return (
+    <main>
+      <h2>my Notifications</h2>
+    </main>
+  );
 };
 
 export default Notifications;

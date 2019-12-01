@@ -17,6 +17,7 @@ import MyAccount, { IMyAccountProps } from 'View/MyAccount/MyAccount';
 import Music, { IMusicProps } from 'View/Music/Music';
 import News, { INewsProps } from 'View/News/News';
 import Notifications, { INotificationsProps } from 'View/Notifications/Notifications';
+import Playlists, { IPlaylistsProps } from 'View/Playlists/Playlists';
 import User, { IUserProps } from 'View/User/User';
 
 import { GlobalStyle, theme } from 'Utility/resets.style';
@@ -47,6 +48,7 @@ const App: React.FC = () => {
                 path="/notifications/:userId/"
                 render={(props: INotificationsProps) => <Notifications {...props} />}
               />
+              <Route exact path="/playlists/:userId" render={(props: IPlaylistsProps) => <Playlists {...props} />} />
               <Route exact path="/user/:userId/:searchedUserId" render={(props: IUserProps) => <User {...props} />} />
             </Switch>
             <Footer />

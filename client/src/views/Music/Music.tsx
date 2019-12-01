@@ -6,7 +6,11 @@ export interface IMusicProps extends RouteComponentProps<{ userId: string }> {}
 
 const Music: React.FC<IMusicProps> = (props: IMusicProps) => {
   usePageMount('Music');
-  return <main>music page</main>;
+  return (
+    <main>
+      <h2>my music</h2>
+    </main>
+  );
 };
 
 export default Music;

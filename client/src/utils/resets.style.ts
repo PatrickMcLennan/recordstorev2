@@ -55,6 +55,29 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
         display: block;
         padding: 15px 7.5% 100px 7.5%;
         font-family: 'Lato';
+        overflow-x: hidden;
+                    /* 100vh - Header & Footer Height */
+        min-height: calc(100vh - 59px - 42.3281px);
+
+        h2:first-of-type {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 300;
+            text-transform: lowercase;
+
+            &::after {
+                position: absolute;
+                top: calc(100% + 1px);
+                bottom: 1px;
+                height: 1px;
+                width: 100%;
+                content: '';
+                display: block;
+                background-color: white;
+            }
+        }
     }
     ul {
         list-style-type: none;
@@ -123,6 +146,7 @@ export const theme: Function = (mainHeight: number): object => {
         }
       }
     `,
+
     // Generic styling for Button hover/Focus
     buttonAnimation: css`
       transition: all 0.3s ease-in-out;
@@ -151,6 +175,8 @@ export const theme: Function = (mainHeight: number): object => {
         }
       }
     `,
+
+    // Main White Text Input, with Red background Error
     whiteTextInput: css<{ inputError?: boolean }>`
       padding: 10px;
       background-color: rgba(255, 255, 255, 0.75);
@@ -166,6 +192,59 @@ export const theme: Function = (mainHeight: number): object => {
         css`
           background-color: rgba(231, 76, 60, 0.7);
         `}
+    `,
+
+    checkBox: css<{ currentlyChecked: boolean }>`
+      border: 1px solid white;
+      background-color: none;
+
+      &::after {
+        content: '\\2713';
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: all 0.2s ease-in-out;
+        ${({ currentlyChecked }) =>
+          currentlyChecked &&
+          css`
+            opacity: 1;
+          `}
+      }
+    `,
+
+    // Main ul/li dropdown, white, transperant hover
+    mainDropdownUl: css`
+      transform-origin: right;
+      transition: all 0.3s ease-in-out;
+
+      li {
+        background-color: white;
+        border: 1px solid white;
+        color: ${({ theme: { mainDarkBlue } }) => mainDarkBlue};
+        font-weight: 500;
+        letter-spacing: 0.75px;
+        text-transform: uppercase;
+        transition: all 0.1s ease-in-out;
+        white-space: nowrap;
+        z-index: 100;
+
+        & > a,
+        & > button {
+          display: block;
+          padding: 10px 20px;
+        }
+
+        &:hover {
+          background-color: transparent;
+          color: white;
+        }
+      }
+    `,
+
+    /**
+     * TYPOGRAPHY
+     */
+    mainH2: css`
+      font-size: 35px;
     `
   };
 };
