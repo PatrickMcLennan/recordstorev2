@@ -1,4 +1,4 @@
-import { createGlobalStyle, css, GlobalStyleComponent } from 'styled-components';
+import { createGlobalStyle, css, GlobalStyleComponent, FlattenSimpleInterpolation } from 'styled-components';
 
 export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
 
@@ -93,8 +93,14 @@ export const GlobalStyle: GlobalStyleComponent<any, any> = createGlobalStyle`
     }
 `;
 
-export const theme: Function = (mainHeight: number): object => {
+export const theme: Function = (): object => {
   return {
+    // Queries
+    // media: (breakpoint: number, ...args: CSS): FlattenSimpleInterpolation => css`
+    //   @media screen and (max-width: ${breakpoint}px) {
+    //     ${css`${...args}`}
+    //   }
+    // `,
     // Layout
     flexin: (jc: string = `center`, ai: string = `center`, fd: string = `row`, fw: string = `nowrap`) =>
       css`
